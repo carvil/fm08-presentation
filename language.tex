@@ -1,0 +1,121 @@
+\section{Correlation between VDM++ and JML}
+\subsection{Basic Types}
+\frame{
+\frametitle{}
+\begin{itemize}
+\item \textit{Character} $\approx$ \textit{JMLChar}
+\pause
+\newline
+\item \textit{Quote} $\approx$ \textit{JMLEnumeration}
+\pause
+\newline
+\item \textit{Boolean} $\approx$ \textit{Java boolean}
+\pause
+\newline
+\item . . .
+\end{itemize}
+}
+\subsection{Compound Types}
+\frame{
+\frametitle{}
+\begin{itemize}
+\item \textit{Set} $\approx$ \textit{JMLValueSet}
+\pause
+\newline
+\item \textit{Map} $\approx$ \textit{JMLValueToValueMap}
+\pause
+\newline
+\item \textit{Seq} $\approx$ \textit{JMLValueSeq}
+\pause
+\newline
+\item . . .
+\end{itemize}
+}
+\frame{
+\frametitle{Compound Types (cont.)}
+VDM++ Records are different
+\newline
+\newline
+\pause
+Composed with a number of types
+\newline
+\newline
+\pause
+Correspond to Class in Java
+}
+
+\subsection{Language semantics}
+\frame{
+\frametitle{Pre-Conditions}
+\begin{itemize}
+\item VDM++ pre-condition: \textit{pre} Expression
+\newline
+\newline
+\pause
+\item JML requires clause: \textit{requires} Expression
+\newline
+\newline
+\pause
+\item Both respect same principles
+\end{itemize}
+}
+\frame{
+\frametitle{Post-Conditions}
+\begin{itemize}
+\item VDM++ post-condition: \textit{post} Expression
+\newline
+\newline
+\pause
+\item JML ensures clause: \textit{ensures} Expression
+\newline
+\newline
+\pause
+\item Both respect same principles
+\end{itemize}
+}
+\frame{
+\frametitle{Exception Conditions}
+\begin{itemize}
+\item VDM++ \textit{errs}: \textit{errs} COND: c -> r
+\newline
+\newline
+\pause
+\item JML ensures clause: \textit{signals} (E e) P;
+\newline
+\newline
+\pause
+\item Both respect same principles
+\end{itemize}
+}
+\frame{
+\frametitle{Invariants}
+VDM++ allows:
+\begin{itemize}
+\item Type invariants
+\item Instance Invariants
+\end{itemize}
+\pause
+JML allows:
+\begin{itemize}
+\item Static invariants
+\item Instance Invariants
+\end{itemize}
+\pause
+Question: How to map VDM++ Type invariants?
+}
+\frame{
+\frametitle{Type Invariants}
+Record: type invariant $\equiv$ instance invariant
+\newline
+\newline
+\pause
+Otherwise, there are two possibilities:
+\begin{itemize}
+\item Instantiate the invariant for each variable using the type
+\newline
+\pause
+\item "Extend" pre-defined JML types with invariant
+\end{itemize}
+\pause
+Solution?
+}

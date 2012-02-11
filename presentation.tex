@@ -1,0 +1,45 @@
+\documentclass{beamer}
+%\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphics}
+%\usepackage{beamerthemecopenhagen}
+\usetheme{Malmoe}
+%\usepackage{beamerthemeCopenhagen}
+\usepackage{graphicx}
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{navigation symbols}{}
+\usepackage{listings}
+\input{jml-listings}
+\lstset{language=[JML]Java,basicstyle=\ttfamily,commentstyle=\ttfamily,
+        showstringspaces=false,
+        keywordstyle=\bfseries,
+        keywordstyle={[2]\bfseries\color{violet!80!black}}
+       }
+
+
+\title{Connecting between VDM++ and JML}
+\author{Carlos Vilhena}
+\institute{Engineering College of Aarhus}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\input{intro}
+
+\input{introduction}
+
+\input{language}
+
+\input{requirements}
+
+\input{architecture}
+
+\input{future}
+
+\end{document}

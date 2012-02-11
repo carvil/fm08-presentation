@@ -1,0 +1,20 @@
+
+protected /*@ spec_public @*/ HashSet arcSet;
+//@                           in arcs;
+//@                           maps arcSet.theSet \into arcs;
+	
+//@ private represents arcs <- arcAbstractValue(arcSet);
+
+/*@ private pure model JMLValueSet arcAbstractValue(HashSet arcs) 
+      @ {
+      @   JMLValueSet ret = new JMLValueSet();
+      @   Iterator arcIter = arcs.iterator();
+      @   while (arcIter.hasNext()) {
+      @     Arc a = (Arc) arcIter.next();
+      @     NodeType from = a.getSource();
+      @     NodeType to = a.getTarget();
+      @     ret = ret.insert(new ArcType(from, to));
+      @   }
+      @   return ret;
+      @ }
+@*/

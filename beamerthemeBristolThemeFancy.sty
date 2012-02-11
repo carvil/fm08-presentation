@@ -1,0 +1,260 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeBristolTheme.sty,v 1.10 2007/11/27 20:53:10 bourke Exp $
+
+% This theme modifies the PaloAlto, sidebar, and sidebartab beamer themes
+%Bristol version by Matt Grime
+% Originally modified by Chris Bourke, University Nebraska, Lincoln.
+% Last modified 27/11/2007
+
+% BEGIN sidebar dimension setup
+\newdimen\beamer@sidebarwidth
+\newdimen\beamer@headheight
+\usebeamerfont{frametitle}
+\beamer@sidebarwidth=2cm
+\beamer@headheight=1cm  % height of title bar/logo area
+\reset@font
+
+\def\beamer@lefttext{left}
+
+% Package options
+\DeclareOptionBeamer{hideothersubsections}[]{\beamer@nav@subsectionstyle{show/show/hide}}
+\DeclareOptionBeamer{hideallsubsections}[]{\beamer@nav@subsectionstyle{hide}}
+\DeclareOptionBeamer{width}{\beamer@sidebarwidth=#1}
+\DeclareOptionBeamer{height}{\beamer@headheight=#1}
+\DeclareOptionBeamer{left}{\def\beamer@sidebarside{left}}
+\DeclareOptionBeamer{right}{\def\beamer@sidebarside{right}}
+
+
+\ExecuteOptionsBeamer{left}  % change to left/ right if you want the sidebar on the left/right
+% note having it on the right means you have to go and play with the page numbering position below
+
+\ProcessOptionsBeamer
+
+% Default mode (<presentation> encompasses <beamer>, <handout>, and <trans> (transparencies))
+\mode<beamer>
+
+% All Beamer Boxes will be rounded with a drop shadow
+\useinnertheme[shadow=true]{rounded}
+% cut-pasted-n-hacked sidebar theme
+\ifdim\beamer@headheight>0pt
+% if head height is 0pt, use default frame title
+ \defbeamertemplate*{frametitle}{sidebar theme}
+  {%
+    \nointerlineskip%
+    \vskip-\beamer@headheight%
+    \vbox to \beamer@headheight{%
+      \vfil
+      \leftskip=-\beamer@leftmargin%
+      \advance\leftskip by0.3cm%
+      \rightskip=-\beamer@rightmargin%
+      \advance\rightskip by0.3cm plus1fil%
+      {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle\par}%
+      {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+      \vbox{}%
+      \vskip-1em%
+      \vfil
+    }%
+  }
+
+  \defbeamertemplate*{headline}{sidebar theme}
+  {%
+    \begin{beamercolorbox}[wd=\paperwidth]{frametitle}
+      \ifx\beamer@sidebarside\beamer@lefttext%
+      \else%
+        \hfill%
+      \fi%
+      \ifdim\beamer@sidebarwidth>0pt%
+        %\usebeamercolor[bg]{logo}%
+        \vrule width\beamer@sidebarwidth height \beamer@headheight%
+        \hskip-\beamer@sidebarwidth%
+        \hbox to \beamer@sidebarwidth{\hss\vbox to
+          \beamer@headheight{}\hss}%
+      \else%
+        \vrule width0pt height \beamer@headheight%
+      \fi%
+    \end{beamercolorbox}
+  }
+\fi
+
+
+\def\beamer@sidebarformat#1#2#3{%
+  \begin{beamercolorbox}[wd=\beamer@sidebarwidth,leftskip=#1,rightskip=1ex plus1fil,vmode]{#2}
+    \vbox{}%
+    #3\par%
+    \vbox{}%
+    \vskip-1.5ex%
+  \end{beamercolorbox}
+}
+
+\defbeamertemplate*{section in sidebar}{sidebar theme}
+{%
+  \vbox{%
+    \vskip1ex%
+    \beamer@sidebarformat{3pt}{section in sidebar}{\insertsectionhead}%
+  }%
+}
+
+\defbeamertemplate*{section in sidebar shaded}{sidebar theme}
+{%
+  \vbox{%
+    \vskip1ex%
+    \beamer@sidebarformat{3pt}{section in sidebar shaded}{\insertsectionhead}%
+  }%
+}
+
+\defbeamertemplate*{subsection in sidebar}{sidebar theme}
+{%
+  \beamer@sidebarformat{5pt}{subsection in sidebar}{\insertsubsectionhead}%
+}
+
+\defbeamertemplate*{subsection in sidebar shaded}{sidebar theme}
+{%
+  \beamer@sidebarformat{5pt}{subsection in sidebar shaded}{\insertsubsectionhead}%
+}
+
+
+\ifdim\beamer@sidebarwidth>0pt
+
+                                % Sidebar
+  \setbeamersize{sidebar width \beamer@sidebarside=\beamer@sidebarwidth}
+  \defbeamertemplate*{sidebar \beamer@sidebarside}{sidebar theme}
+  {
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    {\usebeamerfont{title in sidebar}%
+      \vskip1.5em%
+      \hskip3pt%
+      \usebeamercolor[fg]{title in sidebar}%
+      \insertshorttitle[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \vskip1.25em%
+    }%
+    {%
+      \hskip3pt%
+      \usebeamercolor[fg]{author in sidebar}%
+      \usebeamerfont{author in sidebar}%
+      \insertshortauthor[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \vskip1.25em%
+    }%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext%
+    \else%
+      \usebeamercolor{normal text}%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt%
+    \fi%
+  }%
+
+  \ifx\beamer@sidebarside\beamer@lefttext%
+    \defbeamertemplate*{sidebar right}{sidebar theme}
+    {%
+      \vfill%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt}
+  \fi
+                                % Margins
+  \setbeamersize{text margin left=0.5cm,text margin right=0.5cm}
+\fi
+
+
+
+
+
+
+% define all the university colors
+\setbeamercolor*{section in sidebar shaded}{parent=palette sidebar secondary}
+\setbeamercolor*{section in sidebar}
+  {parent=section in sidebar shaded,use={sidebar,section in sidebar shaded}, }
+
+\setbeamercolor*{subsection in sidebar shaded}{parent=palette sidebar primary}
+\setbeamercolor*{subsection in sidebar}
+  {parent=subsection in sidebar shaded,use=section in sidebar,%
+   bg=section in sidebar.bg, % We simply inherit the section properties
+   fg=section in sidebar.fg} % Here too.
+% Add page numbering to bottom left.
+% simply setting it (\setbeamertemplate{footline}[page number]) defaults to lower right
+\addtobeamertemplate{footline}
+{%
+   \usebeamercolor[fg]{author in sidebar}
+   \vskip-1cm\hskip20pt
+   %\insertpagenumber\,/\,\insertpresentationendpage\kern1em\vskip2pt%
+   \insertframenumber\,/\,\inserttotalframenumber\kern1em\vskip2pt%
+}
+
+
+
+%\definecolor{brisbg}{cmyk}{0,0.91,0.72,0.23} % this is the maroon official colour of the university, called pantone
+\definecolor{brisbg}{RGB}{40,88,187} %this is the blue colour used on the university's webpage banner.
+
+\definecolor{brisfg}{RGB}{255,250,250}
+
+\setbeamercolor{structure}{fg=brisfg}
+\setbeamercolor{palette primary}{fg=brisfg,bg=brisbg}
+\setbeamercolor{palette secondary}{fg=brisfg,bg=brisbg!80}
+\setbeamercolor{palette tertiary}{fg=brisfg,bg=brisbg!70}
+\setbeamercolor{palette quaternary}{fg=brisfg,bg=brisbg!60}
+\setbeamercolor{titlelike}{parent=palette primary}
+\setbeamercolor{block title}{fg=brisfg,bg=brisbg}
+\setbeamercolor{block title alerted}{use=alerted text,fg=brisfg,bg=alerted text.fg!75!bg}
+\setbeamercolor{block title example}{use=example text,fg=brisfg,bg=example text.fg!75!bg}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=brisbg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=brisbg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!25!bg}
+\setbeamercolor{sidebar}{bg=black,fg=white}
+\setbeamercolor*{frametitle}{parent=sidebar}
+\setbeamercolor{palette sidebar primary}{fg=white}
+\setbeamercolor{palette sidebar secondary}{fg=white}
+\setbeamercolor{palette sidebar tertiary}{fg=white}         % name
+\setbeamercolor{palette sidebar quaternary}{fg=white}  %does title in side bar
+\setbeamercolor*{separation line}{brisbg}
+\setbeamercolor*{fine separation line}{brisbg}
+
+%This creates the shading in the sidebar.
+\setbeamertemplate{sidebar canvas left}[vertical shading][top=black, bottom=palette primary.bg]
+\setbeamertemplate{sidebar canvas right}[vertical shading][top=palette primary.bg, bottom=black]
+
+% Set the  logo, pdf must be in the latex path or working directory
+%\setbeamercolor{logo}{bg=black}
+%\logo{\includegraphics[width=1.8cm]{logo-white.pdf}}
+
+% Handout Mode - Using the default layouts, no menus, etc.
+\mode
+<handout>
+\usetheme{default}
+\usecolortheme{default}
+%\setbeamertemplate{navigation symbols}{}
+\useinnertheme{default}
+%reset shadow boxes to very light grey
+\setbeamercolor{block title}{fg=black,bg=UNL@LightGrey} %
+\setbeamercolor{block body}{fg=black,bg=UNL@VeryLightGrey} %
+
+% Settings for every mode
+\mode
+<all>
+
+%Two horrible hacks to get a "note page" after every slide.
+\newcommand{\noteframe}{
+\only<handout>{ %
+  \begin{frame}
+   \frametitle{Notes}
+   \begin{center}
+   \begin{tikzpicture}
+    \foreach \y in {0,1,2,3,4,5,6}
+     \draw[thick] (0,\y) -- (11,\y);
+   \end{tikzpicture}
+   \end{center}
+  \end{frame}
+  }%
+}
+
+\newcommand{\noteslide}{%to be used after every \framebreak
+\only<handout>{ %
+   \begin{center}
+   \begin{tikzpicture}
+    \foreach \y in {0,1,2,3,4,5,6}
+     \draw[thick] (0,\y) -- (11,\y);
+   \end{tikzpicture}
+   \end{center}
+   \framebreak
+   }%
+}
+

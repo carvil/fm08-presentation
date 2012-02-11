@@ -1,0 +1,47 @@
+\ProvidesPackageRCS $Header: /beamercolorthememaroonbris.sty,v 1 2007/11/26 $
+
+%\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/color/beamercolorthemecrane.sty,v 1.8 2004/10/28 17:15:51 tantau Exp $
+
+%modified by Matthew Grime
+
+% Copyright 2003 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\mode<presentation>
+
+\definecolor{brisbg}{cmyk}{0,0.91,0.72,0.23} % this is pantone the official maroon colour
+%\definecolor{brisbg}{RGB}{40,88,187} % The blue from the banner on the bristol website
+
+\definecolor{brisfg}{RGB}{0,0,0}
+
+\setbeamercolor{structure}{fg=brisbg}
+
+\setbeamercolor{palette primary}{fg=brisfg,bg=brisbg}
+\setbeamercolor{palette secondary}{fg=brisfg,bg=brisbg!80}
+\setbeamercolor{palette tertiary}{fg=brisfg,bg=brisbg!70}
+\setbeamercolor{palette quaternary}{fg=brisfg,bg=brisbg!60}
+
+\setbeamercolor{titlelike}{parent=palette quaternary}
+
+\setbeamercolor{block title}{fg=brisfg,bg=brisbg}
+\setbeamercolor{block title alerted}{use=alerted text,fg=brisfg,bg=alerted text.fg!75!bg}
+\setbeamercolor{block title example}{use=example text,fg=brisfg,bg=example text.fg!75!bg}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=brisbg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=brisbg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!25!bg}
+
+\setbeamercolor{sidebar}{bg=brisbg}
+  
+\setbeamercolor{palette sidebar primary}{fg=brisbg}
+\setbeamercolor{palette sidebar secondary}{fg=brisbg}
+\setbeamercolor{palette sidebar tertiary}{fg=black}         % name
+\setbeamercolor{palette sidebar quaternary}{fg=black}  %does title in side bar
+
+\setbeamercolor*{separation line}{brisbg}
+\setbeamercolor*{fine separation line}{brisbg}
+
+\mode
+<all>
